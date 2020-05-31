@@ -1,23 +1,25 @@
 
 var length = document.querySelectorAll('.drum').length;
 for(var i = 0 ; i < length; i++ ){
-
+//detects button pressed
 document.querySelectorAll('.drum')[i].addEventListener('click',function (){
 var buttonClicked = this.innerHTML;
 makeSound(buttonClicked);
-
+buttonAnimation(buttonClicked);
 });
 
 }
 
-
+//detects key pressed
 
 document.addEventListener('keydown',function (event){
 
   var keyPressed = event.key.toLowerCase();
 makeSound(keyPressed);
+buttonAnimation(keyPressed);
 });
 
+//makes sound when key is pressed
 function makeSound(key){
   switch (key) {
     case 'w': var audio =  new Audio('sounds/tom-1.mp3'); audio.play();
@@ -37,4 +39,13 @@ function makeSound(key){
     default:;
 
   }
+}
+//adds animation to pressed key
+function buttonAnimation (currentKey){
+  var activeButton = document.querySelector('.'+ currentKey );
+  activeButton.classList.add('pressed');
+
+  setTimeout(function(){
+    activeButton.classList.remove('pressed');
+  },300)
 }
