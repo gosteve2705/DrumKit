@@ -4,6 +4,11 @@ version: 2.1
 
 # Orchestrate or schedule a set of jobs
 jobs:
+  print_env:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >>.
   print_hello:
     docker:
       - image: circleci/node:13.8.0
@@ -23,3 +28,4 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_env      
